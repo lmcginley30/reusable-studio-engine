@@ -1,98 +1,108 @@
 # Copilot Prompt System
 
+These prompts keep AI assistance focused on the Mouse Gravity site and the
+reusable engine around it.
+
 ## Context Block
 
-I am building a browser-based creative coding system using vanilla HTML, CSS,
-JavaScript, and Canvas.
+I am building a browser-based creative coding experiment with vanilla HTML,
+CSS, JavaScript, and Canvas. The current site is called **Mouse Gravity**.
 
-The project has this structure:
+The page has one interaction: pointer position attracts a white outlined orb.
+The orb has velocity, friction, directional stretch, and a short fading trail.
+The current live implementation is in `main.js`; the files in `src/` are being
+shaped into reusable modules.
 
-- `index.html` — document structure
-- `style.css` — visual styling
-- `main.js` — application entry point
-- `src/canvas/` — Canvas setup and animation
-- `src/input/` — user input
-- `src/utils/` — reusable utilities
-- `docs/` — planning and prompt documentation
-- `process/` — screenshots and iteration notes
+Project structure:
 
-The system must remain modular and understandable.
-
-My current constraints are:
-
-- one primary input signal
-- one dominant visual behavior
-- one primary visual form
-- no external libraries
-- Canvas must use HiDPI scaling
-- `main.js` should remain a simple entry point
-
-Do not invent additional features unless explicitly requested.
-
-## Prompt Template 1 — Canvas Draw Loop
-
-I need technical help implementing the Canvas animation loop.
-
-Current behavior:
-[DESCRIBE BEHAVIOR]
-
-Input:
-[DESCRIBE INPUT]
-
-Parameter:
-[DESCRIBE PARAMETER]
+- `index.html` — document structure and interaction copy
+- `style.css` — full-screen layout and typography
+- `main.js` — current runtime and composition point
+- `src/canvas/` — Canvas setup and loop modules
+- `src/input/` — pointer input module
+- `src/utils/` — reusable math helpers
+- `docs/` — system rules, roadmap, and prompts
+- `process/` — changelog and screenshot evidence
 
 Constraints:
-[LIST CONSTRAINTS]
 
-Tell me which file should change and explain why.
-Keep the implementation minimal and modular.
+- Keep pointer movement as the only primary input.
+- Keep attraction toward the pointer as the dominant behavior.
+- Keep one primary visual form: the orb.
+- Do not add external libraries or a control panel unless requested.
+- Preserve HiDPI Canvas scaling and responsive behavior.
+- Keep `main.js` focused on composition after modular extraction.
+- Do not rewrite unrelated files.
 
-## Prompt Template 2 — Input Mapping
+## Prompt 1: Change the Physics
 
-I need to connect this input:
+I need to adjust the Mouse Gravity physics.
 
-[DESCRIBE INPUT]
+Current behavior:
+[DESCRIBE WHAT THE ORB DOES]
 
-to this parameter:
+Desired behavior:
+[DESCRIBE THE CHANGE IN PLAIN LANGUAGE]
 
-[DESCRIBE PARAMETER]
+Relevant parameter:
+[gravity, friction, radius, trailLength, or another parameter]
 
-The input should be mapped from:
+Constraints:
+- Keep pointer movement as the only input.
+- Keep the orb readable and centered in the visual hierarchy.
+- Change the smallest possible number of files.
 
-[INPUT RANGE]
+Identify the controlling code path, propose the smallest edit, and explain how
+the change affects attraction, momentum, or stretch.
 
-to:
+## Prompt 2: Extract a Module
 
-[OUTPUT RANGE]
+I want to extract this responsibility from `main.js`:
 
-Do not change the visual design or add new behavior.
-Explain the mapping in plain language.
+[Canvas setup, pointer input, physics state, or drawing loop]
 
-## Prompt Template 3 — Debugging
+The current behavior must remain unchanged. Show the smallest module boundary,
+the API between the module and the runtime, and the files that need updating.
+Do not reorganize unrelated code or add abstractions without a concrete use.
 
-Something is not behaving correctly.
+## Prompt 3: Diagnose a Visual Bug
+
+Mouse Gravity is not behaving as expected.
 
 Expected behavior:
-[DESCRIBE EXPECTED RESULT]
+[DESCRIBE THE VISIBLE RESULT]
 
 Actual behavior:
-[DESCRIBE ACTUAL RESULT]
+[DESCRIBE THE VISIBLE PROBLEM]
+
+Reproduction steps:
+[LIST THE POINTER, RESIZE, OR VIEWPORT ACTIONS]
 
 Relevant files:
 [LIST FILES]
 
-Help me identify the smallest change needed to fix it.
-Do not rewrite unrelated code.
+Trace the smallest controlling code path first. Suggest one focused fix and one
+cheap browser check that could confirm or reject the diagnosis.
+
+## Prompt 4: Review a Visual Change
+
+Review this proposed change to Mouse Gravity:
+
+[DESCRIBE THE CHANGE]
+
+Check whether it improves the relationship between pointer movement and orb
+motion. Look for unnecessary decoration, loss of readability, resize bugs,
+performance problems, and behavior that conflicts with the System Charter.
+Return findings first, ordered by severity, followed by missing tests.
 
 ## AI Collaboration Rule
 
-Every AI response must be followed by my own explanation of:
+After each AI-assisted change, record:
 
 1. What changed.
 2. Which file changed.
 3. Why the change was necessary.
-4. How the change affects the system.
+4. How the change affects the pointer-to-orb relationship.
 
-AI-generated code is not considered finished until I can explain what it does
-in plain language.
+AI-generated code is unfinished until its behavior can be explained in plain
+language and checked in the browser.

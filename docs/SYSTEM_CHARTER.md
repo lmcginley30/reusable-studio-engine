@@ -1,44 +1,62 @@
 # System Charter
 
-The engine is designed to turn a simple input into a readable visual behavior.
+Reusable Studio Engine is a small browser-based creative coding system. Its
+current experiment, **Mouse Gravity**, turns the position of the pointer into a
+physical-looking response: a white orb is pulled toward the cursor, eases into
+motion through friction, stretches in the direction of the force, and leaves a
+short fading trail.
 
-My intent is to build systems where meaning comes from relationships rather than decoration.
+The engine is not trying to simulate reality. It is trying to make a simple
+relationship feel immediate, legible, and reusable.
+
+## Core Relationship
+
+- **Signal:** pointer position on the viewport
+- **State:** orb position, velocity, and recent positions
+- **Behavior:** spring-like attraction with friction
+- **Visual form:** one outlined orb with an elastic ellipse, glow, trail, and
+	connection line
+- **Readability test:** moving the pointer should visibly pull and stretch the
+	orb within five seconds, without needing instructions beyond the page label
 
 ## Constraints
 
-1. I will use one primary input signal at a time.
-2. I will keep the dominant behavior understandable within five seconds.
-3. I will build the smallest working system before adding polish.
+1. Keep one primary input signal: pointer movement.
+2. Keep one dominant visual behavior: attraction toward the pointer.
+3. Keep the orb and its motion readable before adding effects.
+4. Preserve smooth motion across viewport sizes and HiDPI displays.
+5. Prefer a small number of meaningful parameters over a feature-heavy control
+	 panel.
+6. Build the smallest working interaction before polishing it.
 
 ## Tensions
 
-- Control vs. unpredictability
-- Order vs. organic movement
+- Control vs. momentum
+- Precision vs. organic motion
+- Minimalism vs. visible feedback
+- Reusable structure vs. experiment-specific character
 
 ## Taste Vow
 
-I refuse to add effects just because they look impressive.
-
-The visual form should earn its place through behavior.
-
-## Template Sketch
-
-Signal: mouse X position
-
-Parameter: pulse speed
-
-Behavior: the ring chanes shape the faster the mouse moves.
-
-Readability test: moving the mouse around makes  the ring visibly change shape faster within five seconds.
+Do not add an effect because it looks impressive in isolation. Every glow,
+trail, stretch, or line must clarify the force, velocity, or relationship
+between the pointer and the orb. If removing an effect does not reduce
+understanding, remove the effect.
 
 ## Architecture
 
-- `index.html` owns the document structure.
-- `style.css` owns basic presentation.
-- `main.js` is the entry point and wires modules together.
-- `src/canvas/` owns Canvas setup and animation.
-- `src/input/` owns user input.
-- `src/utils/` owns reusable mathematical helpers.
-- `docs/` owns planning and AI collaboration rules.
-- `process/` owns evidence of iteration and development.
-- `assets/` is reserved for future media.
+- `index.html` owns the page structure, title, and interaction instructions.
+- `style.css` owns the full-screen presentation and typographic overlay.
+- `main.js` is the current runtime entry point and owns the live Mouse Gravity
+	prototype: canvas setup, pointer state, physics, trail state, and drawing.
+- `src/canvas/` contains reusable Canvas setup and loop candidates for the next
+	modular extraction.
+- `src/input/` contains the reusable pointer input candidate.
+- `src/utils/` contains reusable math helpers.
+- `docs/` owns the system rules, roadmap, and AI collaboration prompts.
+- `process/` owns iteration notes and screenshot evidence.
+- `assets/` is reserved for media only when the interaction needs it.
+
+The reusable modules should earn their connection to the runtime through a
+small, behavior-preserving extraction. Do not split `main.js` merely to make
+the folder structure look complete.
